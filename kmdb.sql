@@ -120,14 +120,38 @@ CREATE TABLE movies (
 
 CREATE TABLE actors (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
+  movie_id INTEGER,
   name TEXT,
-  movie TEXT
+  role TEXT
 );
 
 -- Insert data into your database that reflects the sample data shown above
 -- Use hard-coded foreign key IDs when necessary
 -- TODO!
-INSERT INTO movies ("Batman Begins",2005,"PG-13",  "Warner Bros.")
+INSERT INTO movies VALUES(NULL,"Batman Begins",2005,"PG-13",  "Warner Bros.");
+INSERT INTO movies VALUES(NULL,"The Dark Knight",        2008,           "PG-13",  "Warner Bros.");
+INSERT INTO movies VALUES(NULL,"The Dark Knight Rises",  2012 ,          "PG-13" , "Warner Bros.");
+
+-- Batman Begins
+INSERT INTO actors VALUES (NULL, 1, 'Christian Bale', 'Bruce Wayne');
+INSERT INTO actors VALUES (NULL, 1, 'Michael Caine', 'Alfred');
+INSERT INTO actors VALUES (NULL, 1, 'Liam Neeson', 'Ra''s Al Ghul');
+INSERT INTO actors VALUES (NULL, 1, 'Katie Holmes', 'Rachel Dawes');
+INSERT INTO actors VALUES (NULL, 1, 'Gary Oldman', 'Commissioner Gordon');
+
+-- The Dark Knight
+INSERT INTO actors VALUES (NULL, 2, 'Christian Bale', 'Bruce Wayne');
+INSERT INTO actors VALUES (NULL, 2, 'Heath Ledger', 'Joker');
+INSERT INTO actors VALUES (NULL, 2, 'Aaron Eckhart', 'Harvey Dent');
+INSERT INTO actors VALUES (NULL, 2, 'Michael Caine', 'Alfred');
+INSERT INTO actors VALUES (NULL, 2, 'Maggie Gyllenhaal', 'Rachel Dawes');
+
+-- The Dark Knight Rises
+INSERT INTO actors VALUES (NULL, 3, 'Christian Bale', 'Bruce Wayne');
+INSERT INTO actors VALUES (NULL, 3, 'Gary Oldman', 'Commissioner Gordon');
+INSERT INTO actors VALUES (NULL, 3, 'Tom Hardy', 'Bane');
+INSERT INTO actors VALUES (NULL, 3, 'Joseph Gordon-Levitt', 'John Blake');
+INSERT INTO actors VALUES (NULL, 3, 'Anne Hathaway', 'Selina Kyle');
 
 -- Prints a header for the movies output
 .print "Movies"
@@ -136,6 +160,7 @@ INSERT INTO movies ("Batman Begins",2005,"PG-13",  "Warner Bros.")
 
 -- The SQL statement for the movies output
 -- TODO!
+SELECT title, year, mpaa_rating, studio FROM movies;
 
 -- Prints a header for the cast output
 .print ""
@@ -147,3 +172,4 @@ INSERT INTO movies ("Batman Begins",2005,"PG-13",  "Warner Bros.")
 -- The SQL statement for the cast output
 -- TODO!
 
+SELECT title, actors.name, actors.role FROM movies INNER JOIN actors ON movies.id= actors.movie_id;
